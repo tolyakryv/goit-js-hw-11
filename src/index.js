@@ -19,39 +19,45 @@ ref.input.addEventListener(
 );
 
 function fetchCountries(name) {
-  return fetch(`https://restcountries.com/v2/name/${name}`)
+  return fetch(`https://restcountries.com/v2/name/${name}?name,capital,flag,population,languages`)
     .then(response => {
       return response.json();
     })
-    .then(renderMarkup);
+    .then(renderMarkup)
+    .catch(error => {
+      Notify.failure('Oops, there is no country with that name');
+      console.log(error);
+    });
 }
-function renderMarkup(name) {
+function renderMarkup(value) {
   ref.list.innerHTML = '';
   ref.info.innerHTML = '';
-  if (name.length == null) {
-    Notify.failure('not found');
-  }
-  const markupCountriesInfo = name
+  // if (name.length == null) {
+  //   Notify.failure('not found');
+  // }
+  // const language = value[0].languages.flatmap(({ name }) => name).join(', ');
+  // console.log(language);
+  const markupCountriesInfo = value
     .map(
-      ({ name, capital, flag, population, languages }) =>
-        `<ul><li><img src='${flag}' alt ="${name}"  width="30" height="15" ></img>   ${name}</li>
-      <li>Capital: ${capital}</li>
-      <li>Population: ${population}</li>
-      <li>Languages:${languages[0].name}</li></ul>`,
+      ({ name, capital, flags: { svg }, population, languages }) =>
+        `<ul><li><img src='${svg}' alt ="${name}"  width="30" height="15" ></img>   ${name}</li>
+      <li>Capital:  ${capital}</li>
+      <li>Population:  ${population}</li>
+      <li>Languages:  ${languages[0].name}</li></ul>`,
     )
     .join('');
-  const markupCountriesList = name
+  const markupCountriesList = value
     .map(
-      ({ name, flag }) =>
-        `<li><img src='${flag}' alt ="${name}"  width="30" height="15" ></img>   ${name}</li>`,
+      ({ name, flags: { svg } }) =>
+        `<li><img src='${svg}' alt ="${name}"  width="30" height="15" ></img>   ${name}</li>`,
     )
     .join('');
-  if (name.length === 1) {
+  if (value.length === 1) {
     ref.info.insertAdjacentHTML('afterbegin', markupCountriesInfo);
   } else {
-    if (name.length > 10) {
+    if (value.length > 10) {
       Notify.info('Too many matches found. Please enter a more specific name.');
-      return console.log(name.length);
+      return console.log(value.length);
     }
     ref.list.insertAdjacentHTML('afterbegin', markupCountriesList);
   }
