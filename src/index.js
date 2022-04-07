@@ -13,8 +13,9 @@ ref.input.addEventListener(
   'input',
   debounce(() => {
     const searchName = ref.input.value.trim();
-
-    fetchCountries(searchName);
+    if (searchName.length > 1) {
+      fetchCountries(searchName);
+    }
   }, DEBOUNCE_DELAY),
 );
 
@@ -32,18 +33,14 @@ function fetchCountries(name) {
 function renderMarkup(value) {
   ref.list.innerHTML = '';
   ref.info.innerHTML = '';
-  // if (name.length == null) {
-  //   Notify.failure('not found');
-  // }
-  // const language = value[0].languages.flatmap(({ name }) => name).join(', ');
-  // console.log(language);
+  const language = value[0].languages.map(({ name }) => name).join(',  ');
   const markupCountriesInfo = value
     .map(
       ({ name, capital, flags: { svg }, population, languages }) =>
         `<ul><li><img src='${svg}' alt ="${name}"  width="30" height="15" ></img>   ${name}</li>
       <li>Capital:  ${capital}</li>
       <li>Population:  ${population}</li>
-      <li>Languages:  ${languages[0].name}</li></ul>`,
+      <li>Languages:  ${language}</li></ul>`,
     )
     .join('');
   const markupCountriesList = value
