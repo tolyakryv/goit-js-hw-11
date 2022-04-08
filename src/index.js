@@ -15,6 +15,9 @@ ref.input.addEventListener(
     const searchName = ref.input.value.trim();
     if (searchName.length > 1) {
       fetchCountries(searchName);
+    } else {
+      ref.list.innerHTML = '';
+      ref.info.innerHTML = '';
     }
   }, DEBOUNCE_DELAY),
 );

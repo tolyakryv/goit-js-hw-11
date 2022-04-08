@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { ref } from '..';
 export function renderMarkup(value) {
   ref.list.innerHTML = '';
@@ -21,10 +22,10 @@ export function renderMarkup(value) {
   if (value.length === 1) {
     ref.info.insertAdjacentHTML('afterbegin', markupCountriesInfo);
   } else {
-    if (value.length > 10) {
+    if (2 <= value.length && value.length <= 10) {
+      ref.list.insertAdjacentHTML('afterbegin', markupCountriesList);
+    } else {
       Notify.info('Too many matches found. Please enter a more specific name.');
-      return console.log(value.length);
     }
-    ref.list.insertAdjacentHTML('afterbegin', markupCountriesList);
   }
 }
