@@ -1,4 +1,4 @@
-import { totalPage } from '.';
+import { page, totalPage } from '.';
 import SimpleLightbox from 'simplelightbox';
 import { ref } from '.';
 export function renderMarkup(data) {
@@ -26,13 +26,14 @@ export function renderMarkup(data) {
     })
     .join('');
 
-  ref.gallery.insertAdjacentHTML('afterbegin', imgData);
+  ref.gallery.insertAdjacentHTML('beforeend', imgData);
   const lightbox = new SimpleLightbox('.gallery a', {
     captions: true,
     captionsData: 'alt',
     captionPosition: 'bottom',
     captionDelay: 500,
   });
+
   // totalPage = data.totalHits;
   // return totalPage;
 }
