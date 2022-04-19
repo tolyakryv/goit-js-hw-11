@@ -1,9 +1,6 @@
-import { page, totalPage } from '.';
 import SimpleLightbox from 'simplelightbox';
 import { ref } from '.';
 export function renderMarkup(data) {
-  // totalPage = data.totalHits;
-  // console.log(totalPage);
   const imgData = data.hits
     .map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
       return `<div class="photo-card">
@@ -33,7 +30,4 @@ export function renderMarkup(data) {
     captionPosition: 'bottom',
     captionDelay: 500,
   });
-
-  // totalPage = data.totalHits;
-  // return totalPage;
 }
