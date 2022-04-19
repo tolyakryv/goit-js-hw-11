@@ -64,3 +64,17 @@ p {  margin: 0;
 .isHidden {
 display: none;
 }
+#search-input{
+  margin-right: 5px;
+}
+.search-form{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.load-button-conteiner{
+display: flex;
+  justify-content: center;
+  margin-top: 10px;
+
+}

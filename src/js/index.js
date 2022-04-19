@@ -5,7 +5,7 @@ import { Notify } from 'notiflix';
 import { fetchImg } from './fetchImg';
 import { LoadMoreBtn } from './buttonHidden';
 export let page = 1;
-export let per_page = 3;
+export let per_page = 40;
 export let totalPage = null;
 export const ref = {
   form: document.querySelector('#search-form'),
