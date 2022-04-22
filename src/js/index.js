@@ -42,19 +42,22 @@ function inputData(evt) {
   ref.gallery.innerHTML = '';
 
   const inputValue = evt.currentTarget.elements.searchQuery.value.trim();
-  page = 1;
-  fetchImg(inputValue).then(response => {
-    if (per_page > response.hits.length) {
-      loadMoreBtn.hide();
-    }
-    if (response.totalHits === 0) {
-      loadMoreBtn.hide();
-      return Notify.failure(
-        '"Sorry, there are no images matching your search query. Please try again."',
-      );
-    }
-    Notify.success(`Hooray! We found ${response.totalHits} images.`);
-  });
+  console.log(inputValue);
+  if (inputValue.length > 0) {
+    page = 1;
+    fetchImg(inputValue).then(response => {
+      if (per_page > response.hits.length) {
+        loadMoreBtn.hide();
+      }
+      if (response.totalHits === 0) {
+        loadMoreBtn.hide();
+        return Notify.failure(
+          '"Sorry, there are no images matching your search query. Please try again."',
+        );
+      }
+      Notify.success(`Hooray! We found ${response.totalHits} images.`);
+    });
 
-  loadMoreBtn.show();
+    loadMoreBtn.show();
+  }
 }
