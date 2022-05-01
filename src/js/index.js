@@ -36,13 +36,12 @@ function loadImg() {
     // }
   });
 }
-
+Notify.info('Input text');
 function inputData(evt) {
   evt.preventDefault();
   ref.gallery.innerHTML = '';
 
   const inputValue = evt.currentTarget.elements.searchQuery.value.trim();
-  console.log(inputValue);
   if (inputValue.length > 0) {
     page = 1;
     fetchImg(inputValue).then(response => {
