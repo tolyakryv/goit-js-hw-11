@@ -55,7 +55,6 @@ object-fit: cover;
 }
 
 .info {display: flex;
-
 text-align: center;
   padding: 15px;
 }
